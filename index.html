@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060a14">
+<title>Your Name — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a14;--ink:#e8ebf4;--muted:#93999f;--muted:#8f97aa;--line:#1b2440;--accent:#4d7cff;--accent2:#1d3fae;--panel:rgba(9,14,28,.62)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.65 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:0}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);z-index:0;will-change:transform;pointer-events:none}
+.b1{width:50vmax;height:50vmax;background:#12308f;opacity:.55;top:-16vmax;left:-12vmax}
+.b2{width:40vmax;height:40vmax;background:#0b1f5c;opacity:.7;bottom:-16vmax;right:-10vmax}
+.b3{width:26vmax;height:26vmax;background:#2a55d6;opacity:.3;top:38%;left:50%}
+.wrap{position:relative;z-index:1;min-height:100%;max-width:900px;margin:0 auto;padding:28px 24px 64px;display:flex;flex-direction:column}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font:400 26px "Instrument Serif",serif;letter-spacing:.01em}
+nav{display:flex;gap:2px;flex-wrap:wrap}
+nav button{background:none;border:0;color:var(--muted);font:500 15px "Instrument Sans",sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer;transition:color .2s,background .2s}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected="true"]{color:#fff;background:var(--accent2);box-shadow:0 0 0 1px var(--accent) inset}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+main{flex:1;display:flex;align-items:center;padding:6vh 0}
+section{display:none;width:100%;background:var(--panel);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;padding:clamp(26px,5vw,52px)}
+section.on{display:block;animation:in .5s ease both}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1{font:400 clamp(44px,8vw,84px)/1.02 "Instrument Serif",serif;letter-spacing:-.01em;margin-bottom:18px}
+h2{font:400 clamp(32px,5vw,46px)/1.1 "Instrument Serif",serif;margin-bottom:20px}
+h3{font:600 17px "Instrument Sans",sans-serif;margin-bottom:2px}
+p{max-width:62ch;color:var(--muted)}
+p+p{margin-top:14px}
+a{color:var(--accent);text-underline-offset:3px}
+.item{padding:18px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.meta{font-size:14px;color:var(--muted);margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tags span{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:2px 12px;color:var(--muted)}
+.btn{display:inline-block;margin-top:22px;padding:10px 20px;border-radius:999px;background:var(--accent2);box-shadow:0 0 0 1px var(--accent) inset;color:#fff;text-decoration:none;font-weight:500}
+.btn:hover{background:var(--accent)}
+.links a{display:block;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:19px}
+.links a:first-child{border-top:0}
+.links a span{color:var(--muted);font-size:14px;margin-left:10px}
+.links a:hover{color:var(--accent)}
+footer{position:relative;z-index:1;text-align:center;font-size:13px;color:var(--muted);padding-bottom:18px}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<div class="wrap">
+<header>
+  <div class="brand">Your Name</div>
+  <nav role="tablist" aria-label="Sections">
+    <button role="tab" data-t="about">About</button>
+    <button role="tab" data-t="awards">Awards</button>
+    <button role="tab" data-t="research">Research</button>
+    <button role="tab" data-t="resume">Resume</button>
+    <button role="tab" data-t="projects">Projects</button>
+    <button role="tab" data-t="contact">Contact</button>
+  </nav>
+</header>
+
+<main>
+<section id="about">
+  <h1>Hi, I'm Your Name.</h1>
+  <p>I'm a software engineer at Cisco. Replace this with two or three sentences about what you build, what you care about, and what you're working on now.</p>
+  <p>Add a second short paragraph about your background or interests outside of work.</p>
+  <a class="btn" href="#contact" data-go="contact">Get in touch</a>
+</section>
+
+<section id="awards">
+  <h2>Awards</h2>
+  <div class="item"><h3>Award name</h3><div class="meta">Organization, year</div><p>One sentence on what it recognized.</p></div>
+  <div class="item"><h3>Second award name</h3><div class="meta">Organization, year</div><p>One sentence on what it recognized.</p></div>
+</section>
+
+<section id="research">
+  <h2>Research</h2>
+  <div class="item"><h3>Paper or project title</h3><div class="meta">Venue or status, year</div><p>One or two sentences on the question you studied and what you found.</p><div class="tags"><span>Topic</span><span>Method</span></div></div>
+  <div class="item"><h3>Second paper or project title</h3><div class="meta">Venue or status, year</div><p>One or two sentences on the question you studied and what you found.</p><div class="tags"><span>Topic</span></div></div>
+</section>
+
+<section id="resume">
+  <h2>Resume</h2>
+  <div class="item"><h3>Software Engineer, Cisco</h3><div class="meta">Start year – Present</div><p>What you own and one concrete result you delivered.</p></div>
+  <div class="item"><h3>Previous role, Company</h3><div class="meta">Years</div><p>What you did and what changed because of it.</p></div>
+  <div class="item"><h3>Degree, University</h3><div class="meta">Graduation year</div></div>
+  <div class="item"><h3>Skills</h3><div class="tags"><span>Python</span><span>Go</span><span>Distributed systems</span><span>Networking</span></div><a class="btn" href="resume.pdf" download>Download PDF</a></div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="item"><h3>Project name</h3><div class="meta"><a href="https://github.com/yourusername/project">View on GitHub</a></div><p>What it does and who it's for, in one sentence.</p><div class="tags"><span>Python</span><span>Docker</span></div></div>
+  <div class="item"><h3>Another project</h3><div class="meta"><a href="https://github.com/yourusername/project2">View on GitHub</a></div><p>What it does and who it's for, in one sentence.</p><div class="tags"><span>TypeScript</span></div></div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>The best way to reach me is email.</p>
+  <div class="links" style="margin-top:20px">
+    <a href="mailto:you@example.com">Email<span>you@example.com</span></a>
+    <a href="https://github.com/yourusername">GitHub<span>github.com/yourusername</span></a>
+    <a href="https://www.linkedin.com/in/yourusername">LinkedIn<span>linkedin.com/in/yourusername</span></a>
+  </div>
+</section>
+</main>
+</div>
+<footer>© <span id="yr"></span> Your Name</footer>
+
+<script>
+(function(){
+  var tabs=["about","awards","research","resume","projects","contact"];
+  var btns=document.querySelectorAll("nav button");
+  function show(t){
+    if(tabs.indexOf(t)<0)t="about";
+    tabs.forEach(function(n){document.getElementById(n).classList.toggle("on",n===t)});
+    btns.forEach(function(b){b.setAttribute("aria-selected",b.dataset.t===t)});
+    try{history.replaceState(null,"","#"+t)}catch(e){}
+  }
+  btns.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.t)})});
+  document.querySelectorAll("[data-go]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.dataset.go)})});
+  show(location.hash.slice(1));
+  document.getElementById("yr").textContent=new Date().getFullYear();
+
+  // Living background: dots ripple on their own and swirl toward the cursor.
+  var c=document.getElementById("bg"),x=c.getContext("2d"),W,H,dots=[],GAP=32,t=0;
+  var still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasMouse=matchMedia("(hover:hover)").matches;
+  var m={x:.5,y:.5,on:false},s={x:.5,y:.5};
+  var blobs=document.querySelectorAll(".blob"),F=[.6,-.9,1.3];
+  function size(){
+    var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+    c.width=W*d;c.height=H*d;c.style.width=W+"px";c.style.height=H+"px";x.setTransform(d,0,0,d,0,0);
+    dots=[];for(var i=-1;i<=W/GAP+1;i++)for(var j=-1;j<=H/GAP+1;j++)dots.push([i*GAP,j*GAP]);
+  }
+  addEventListener("resize",size);size();
+  addEventListener("pointermove",function(e){m.x=e.clientX/W;m.y=e.clientY/H;m.on=true});
+  function frame(){
+    t+=.012;
+    var tx=m.on?m.x:.5+Math.sin(t*.7)*.25, ty=m.on?m.y:.5+Math.cos(t*.5)*.25;
+    if(still){tx=.5;ty=.5}
+    s.x+=(tx-s.x)*.07;s.y+=(ty-s.y)*.07;
+    var px=s.x-.5,py=s.y-.5,mx=s.x*W,my=s.y*H;
+    blobs.forEach(function(b,i){
+      var ax=Math.sin(t*.6*F[i]+i)*60,ay=Math.cos(t*.5*F[i]+i)*60;
+      b.style.transform="translate("+(px*-160*F[i]+ax)+"px,"+(py*-160*F[i]+ay)+"px)";
+    });
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<dots.length;i++){
+      var bx=dots[i][0],by=dots[i][1];
+      var ox=bx+Math.sin(by*.012+t*1.4)*7+px*-40, oy=by+Math.cos(bx*.012+t*1.2)*7+py*-40;
+      var dx=mx-ox,dy=my-oy,d=Math.sqrt(dx*dx+dy*dy),f=Math.max(0,1-d/280);
+      var X=ox+dx*f*.3,Y=oy+dy*f*.3;
+      x.fillStyle="rgba(77,124,255,"+(.2+f*.7)+")";
+      x.beginPath();x.arc(X,Y,1.2+f*3,0,6.283);x.fill();
+    }
+    if(!still)requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>
