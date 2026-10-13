@@ -4,377 +4,209 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fafaf8">
-  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0a0b0d">
+  <meta name="color-scheme" content="dark">
   <title>Arjun Pillai</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Figtree:wght@400;500;600&display=swap"
     rel="stylesheet">
 
   <style>
     :root {
-      --bg: #fafaf8;
-      --ink: #1c1d21;
-      --muted: #66686f;
-      --line: #dcdcd6;
-      --accent: #3a4bd1;
-      --panel: rgba(250, 250, 248, .72);
-      --dot: 58, 75, 209;
-      --b1: #c9d2ff;
-      --b2: #ffd9c2;
-      --b3: #cdeee0;
+      --bg: #0a0b0d;
+      --ink: #eceef2;
+      --muted: #8d9199;
+      --line: #24262c;
+      --accent: #4d6bff;
+      --accent2: #2639a8;
+      --panel: rgba(16, 17, 20, .62);
+      --dot: 77, 107, 255;
+      --b1: #141b3d;
+      --b2: #0c1024;
+      --b3: #1c2550;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #121317;
-        --ink: #eeeef2;
-        --muted: #9a9ca6;
-        --line: #2c2e36;
-        --accent: #8c9bff;
-        --panel: rgba(18, 19, 23, .72);
-        --dot: 140, 155, 255;
-        --b1: #2a3170;
-        --b2: #5a3a2c;
-        --b3: #1f4a3d;
-      }
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-    }
-
-    html,
-    body {
-      min-height: 100%;
-    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    html, body { min-height: 100%; }
 
     body {
       background: var(--bg);
       color: var(--ink);
-      font: 400 17px/1.65 "Instrument Sans", system-ui, sans-serif;
+      font: 400 17px/1.65 "Figtree", system-ui, sans-serif;
       overflow-x: hidden;
     }
 
-    #bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    #bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
     .blob {
       position: fixed;
       border-radius: 50%;
-      filter: blur(70px);
-      opacity: .65;
+      filter: blur(90px);
+      opacity: .5;
       z-index: 0;
       will-change: transform;
       pointer-events: none;
     }
 
-    .b1 {
-      width: 46vmax;
-      height: 46vmax;
-      background: var(--b1);
-      top: -12vmax;
-      left: -8vmax;
-    }
-
-    .b2 {
-      width: 38vmax;
-      height: 38vmax;
-      background: var(--b2);
-      bottom: -14vmax;
-      right: -8vmax;
-    }
-
-    .b3 {
-      width: 28vmax;
-      height: 28vmax;
-      background: var(--b3);
-      top: 40%;
-      left: 52%;
-    }
+    .b1 { width: 46vmax; height: 46vmax; background: var(--b1); top: -12vmax; left: -8vmax; }
+    .b2 { width: 38vmax; height: 38vmax; background: var(--b2); bottom: -14vmax; right: -8vmax; }
+    .b3 { width: 28vmax; height: 28vmax; background: var(--b3); top: 40%; left: 52%; }
 
     .wrap {
       position: relative;
       z-index: 1;
-      min-height: 100vh;
-      max-width: 900px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 28px 24px 64px;
-      display: flex;
-      flex-direction: column;
+      padding: 48px 24px 80px;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      font: 400 26px "Instrument Serif", serif;
-      letter-spacing: .01em;
-    }
-
-    nav {
-      display: flex;
-      gap: 2px;
-      flex-wrap: wrap;
-    }
-
-    nav button {
-      background: none;
-      border: 0;
-      color: var(--muted);
-      font: 500 15px "Instrument Sans", sans-serif;
-      padding: 8px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: color .2s, background .2s;
-    }
-
-    nav button:hover {
-      color: var(--ink);
-    }
-
-    nav button[aria-selected="true"] {
-      color: var(--bg);
-      background: var(--ink);
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    main {
-      flex: 1;
+    .hero {
       display: flex;
       align-items: center;
-      padding: 6vh 0;
-    }
-
-    section {
-      display: none;
-      width: 100%;
-      background: var(--panel);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: clamp(26px, 5vw, 52px);
-    }
-
-    section.on {
-      display: block;
-      animation: in .5s ease both;
-    }
-
-    @keyframes in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    h1 {
-      font: 400 clamp(44px, 8vw, 84px)/1.02 "Instrument Serif", serif;
-      letter-spacing: -.01em;
-      margin-bottom: 18px;
-    }
-
-    h2 {
-      font: 400 clamp(32px, 5vw, 46px)/1.1 "Instrument Serif", serif;
-      margin-bottom: 20px;
-    }
-
-    h3 {
-      font: 600 17px "Instrument Sans", sans-serif;
-      margin-bottom: 2px;
-    }
-
-    p {
-      max-width: 62ch;
-      color: var(--muted);
-    }
-
-    p + p {
-      margin-top: 14px;
-    }
-
-    a {
-      color: var(--accent);
-      text-underline-offset: 3px;
-    }
-
-    .item {
-      padding: 18px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .item:first-of-type {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .meta {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .tags span {
-      font-size: 13px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 2px 12px;
-      color: var(--muted);
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: var(--ink);
-      color: var(--bg);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .btn:hover {
-      opacity: .85;
-    }
-
-    .links a {
-      display: block;
-      padding: 12px 0;
-      border-top: 1px solid var(--line);
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 19px;
-    }
-
-    .links a:first-child {
-      border-top: 0;
-    }
-
-    .links a span {
-      color: var(--muted);
-      font-size: 14px;
-      margin-left: 10px;
-    }
-
-    .links a:hover {
-      color: var(--accent);
-    }
-
-    .about {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: clamp(24px, 5vw, 52px);
-      align-items: center;
-    }
-
-    .about h1 {
-      font-size: clamp(38px, 6vw, 64px);
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 10px;
     }
 
     .portrait {
-      width: clamp(200px, 28vw, 290px);
-      height: auto;
-      aspect-ratio: 1 / 1;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
       object-fit: cover;
-      object-position: 50% 25%;
-      border-radius: 26px;
+      object-position: 50% 22%;
       border: 1px solid var(--line);
-      box-shadow: 0 24px 60px -24px rgba(var(--dot), .55);
+      box-shadow: 0 10px 30px -10px rgba(var(--dot), .5);
+      flex: none;
     }
 
-    ul {
-      max-width: 68ch;
-      padding-left: 20px;
-      margin-top: 10px;
+    .hero h1 {
+      font: 400 clamp(30px, 5vw, 40px)/1.1 "Fraunces", serif;
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+    }
+
+    .hero .role { color: var(--muted); font-size: 15px; }
+
+    .social { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .02);
+      color: var(--accent);
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .social a:hover { border-color: var(--accent); background: rgba(77, 107, 255, .12); transform: translateY(-1px); }
+    .social svg { width: 17px; height: 17px; }
+
+    section {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 64px;
+    }
+
+    section:last-of-type { border-bottom: 0; }
+
+    h2 {
+      font: 400 clamp(24px, 4vw, 30px)/1.2 "Fraunces", serif;
+      margin-bottom: 18px;
+    }
+
+    h3 { font: 600 16px "Figtree", sans-serif; margin-bottom: 2px; }
+    p { max-width: 64ch; color: var(--muted); }
+    p + p { margin-top: 12px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+
+    .item { padding: 16px 0; border-top: 1px solid var(--line); }
+    .item:first-of-type { border-top: 0; padding-top: 0; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+
+    .tags span {
+      font-size: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 11px;
       color: var(--muted);
-      font-size: 16px;
     }
 
-    li {
-      margin-top: 6px;
-    }
+    .links-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
+    .linkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .02);
+      color: var(--ink);
+      text-decoration: none;
       font-size: 13px;
-      color: var(--muted);
-      padding-bottom: 18px;
+      font-weight: 500;
+      transition: border-color .2s, background .2s, transform .15s;
     }
 
-    @media (max-width: 700px) {
-      .about {
-        grid-template-columns: 1fr;
-      }
+    .linkbox:hover { border-color: var(--accent); background: rgba(77, 107, 255, .1); transform: translateY(-1px); }
+    .linkbox svg { width: 14px; height: 14px; flex: none; stroke: var(--muted); transition: stroke .2s; }
+    .linkbox:hover svg { stroke: var(--accent); }
 
-      .portrait {
-        order: -1;
-        width: 150px;
-        border-radius: 22px;
-      }
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 1px var(--accent) inset;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+    }
 
-      header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+    .btn:hover { background: var(--accent); }
 
-      nav {
-        width: 100%;
-      }
+    .links a {
+      display: block;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 17px;
+    }
 
-      nav button {
-        padding: 8px 11px;
-      }
+    .links a:first-child { border-top: 0; }
+    .links a span { color: var(--muted); font-size: 13px; margin-left: 10px; }
+    .links a:hover { color: var(--accent); }
 
-      main {
-        padding: 32px 0;
-      }
+    ul { max-width: 68ch; padding-left: 20px; margin-top: 8px; color: var(--muted); font-size: 15px; }
+    li { margin-top: 5px; }
+
+    footer { position: relative; z-index: 1; text-align: center; font-size: 13px; color: var(--muted); padding-bottom: 24px; }
+
+    @media (max-width: 520px) {
+      .hero { gap: 16px; }
+      .portrait { width: 64px; height: 64px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
       }
-
-      .blob {
-        transform: none !important;
-      }
+      .blob { transform: none !important; }
     }
   </style>
 </head>
@@ -386,530 +218,256 @@
   <div class="blob b3" aria-hidden="true"></div>
 
   <div class="wrap">
-    <header>
-      <div class="brand">Arjun Pillai</div>
-
-      <nav role="tablist" aria-label="Sections">
-        <button id="tab-about" role="tab" data-t="about"
-          aria-controls="about" aria-selected="true" tabindex="0">About</button>
-        <button id="tab-awards" role="tab" data-t="awards"
-          aria-controls="awards" aria-selected="false" tabindex="-1">Awards</button>
-        <button id="tab-research" role="tab" data-t="research"
-          aria-controls="research" aria-selected="false" tabindex="-1">Research</button>
-        <button id="tab-resume" role="tab" data-t="resume"
-          aria-controls="resume" aria-selected="false" tabindex="-1">Resume</button>
-        <button id="tab-projects" role="tab" data-t="projects"
-          aria-controls="projects" aria-selected="false" tabindex="-1">Projects</button>
-        <button id="tab-contact" role="tab" data-t="contact"
-          aria-controls="contact" aria-selected="false" tabindex="-1">Contact</button>
-      </nav>
-    </header>
-
-    <main>
-      <section id="about" class="on" role="tabpanel"
-        aria-labelledby="tab-about" tabindex="0">
-        <div class="about">
-          <div>
-            <h1>Hey there! I'm Arjun.</h1>
-
-            <p>I'm a student researcher fascinated by mechanistic interpretability: figuring out what's actually happening inside language models.</p>
-
-            <p>I've worked with the Stanford NLP Group (Dr. Chen Shani) and MIT Critical Data, and research has become a real passion, one that took me to the international stage at IAI²O.</p>
-
-            <p>Outside of research, I love math (geometry is my favorite) and the idea of optimization. My past work on NLP and mechanistic interpretability has been accepted to NeurIPS and is currently under submission to NAACL, ICML, and ICLR.</p>
-
-            <a class="btn" href="#research" data-go="research">See my research</a>
-          </div>
-
-          <img class="portrait" src="photo.jpg"
-            alt="Portrait of Arjun Pillai" width="640" height="654">
-        </div>
-      </section>
-
-      <section id="awards" role="tabpanel"
-        aria-labelledby="tab-awards" tabindex="0" aria-hidden="true">
-        <h2>Awards</h2>
-
-        <div class="item">
-          <h3>IAI²O 2026 — Team USA | Silver Medal</h3>
-          <div class="meta">Issued by USAAIO</div>
-          <p>One of 59 students nationally selected to represent the US internationally (Science Track), earned Silver Medal (19/60).</p>
-        </div>
-
-        <div class="item">
-          <h3>Stanford Math Tournament (SMT)</h3>
-          <div class="meta">Distinguished Honorable Mention (Top 20%) ×4</div>
-        </div>
-
-        <div class="item">
-          <h3>Berkeley Math Tournament (BMT)</h3>
-          <div class="meta">Honorable Mention (Top 50%) ×1</div>
-        </div>
-      </section>
-
-      <section id="research" role="tabpanel"
-        aria-labelledby="tab-research" tabindex="0" aria-hidden="true">
-        <h2>Research</h2>
-
-        <div class="item">
-          <h3>One Head Away from Language Confusion: Single Attention Heads Across Model Families</h3>
-          <div class="meta">
-            NAACL 2027 Main Track · Under submission ·
-            <a href="https://github.com/arjunpil/LIHA-First-Token-Broadcasters"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <p>Traces first-token language identity circuits across six transformer models using edge attribution and exact activation patching, revealing how language signals propagate through neural networks and how instruction tuning affects circuit organization and robustness.</p>
-
-          <div class="tags">
-            <span>Mechanistic interpretability</span>
-            <span>Multilingual</span>
-            <span>Circuits</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>FTB Graph: Determining and Validating First-token Broadcasters and Language-Identity Head Circuits in Multilingual Language Models</h3>
-          <div class="meta">
-            ICML 2027 · Under submission ·
-            <a href="https://github.com/ajlrza/ftb-graph-acdc-multilingual-liha"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <p>Traces first-token language identity circuits across six models (GPT-2, BLOOM-560M, Pythia-1B and 2.8B, Qwen2.5-1.5B base and instruct) using edge attribution patching and exact activation patching.</p>
-
-          <div class="tags">
-            <span>Mechanistic interpretability</span>
-            <span>Multilingual</span>
-            <span>Circuits</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>First-Token Broadcasters: Mechanistic Analysis of Language Identity and Distributed Robustness in Transformers</h3>
-          <div class="meta">
-            NeurIPS LP4FM Workshop (Poster) ·
-            <a href="https://github.com/arjunpil/LIHA-First-Token-Broadcasters/tree/LP4FM"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-            ·
-            <a href="https://arxiv.org/abs/2606.22361"
-              target="_blank" rel="noopener noreferrer">Paper</a>
-          </div>
-
-          <p>Investigates first-token language identity circuits across six multilingual LLMs using edge attribution and activation patching, revealing how instruction tuning shifts language-control mechanisms across model layers.</p>
-
-          <div class="tags">
-            <span>Attention heads</span>
-            <span>Language identity</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>Aggregated vs. Per-Annotator Label Training</h3>
-          <div class="meta">Stanford NLP Group, Dr. Chen Shani · Ongoing</div>
-
-          <p>Compares majority-vote and per-annotator training across five encoders and five decoders on a vaccine hesitancy dataset and ChaosNLI.</p>
-
-          <div class="tags">
-            <span>NLP</span>
-            <span>Annotation disagreement</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>Adolescent Mental Health: LLM Retrieval Label Training</h3>
-          <div class="meta">MIT Critical Data · Ongoing</div>
-
-          <p>A pre-registered experiment auditing how LLMs disclose where their medical knowledge comes from, with every returned citation verified by hand.</p>
-
-          <div class="tags">
-            <span>LLM auditing</span>
-            <span>Citations</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>Linguistic Echoes: Explainable NLP for Academic Stress Detection</h3>
-          <div class="meta">
-            IAI²O AI for Science 2026 · Second Place, Regional Finalist ·
-            <a href="https://github.com/arjunpil/linguistic-echoes-explainable-nlp-stress-detection"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <p>Asks whether NLP models can recover known psycholinguistic stress markers, and whether undergrad, grad, PhD and pre-med communities express stress differently. A fine-tuned DistilBERT reached 79% accuracy (0.874 ROC-AUC) on Dreaddit, and SHAP, LIME and LIWC agreed on first-person pronouns and negative emotion. Analyzed 8,000 academic Reddit posts, with significant community differences after correction (p &lt; 0.001).</p>
-
-          <div class="tags">
-            <span>Explainable AI</span>
-            <span>SHAP</span>
-            <span>LIME</span>
-            <span>LIWC</span>
-            <span>DistilBERT</span>
-          </div>
-        </div>
-
-        <div class="item">
-          <h3>Predicting Building Heating Load via Regularized Regression</h3>
-          <div class="meta">
-            UCLA · PhD Candidate William Legg · NHSJS ·
-            <a href="https://github.com/arjunpil/energy-efficiency-regression"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <p>Predicts building thermal efficiency with OLS, Ridge and Lasso regression built from scratch, including handling collinear features.</p>
-
-          <div class="tags">
-            <span>Regression</span>
-            <span>Lasso</span>
-            <span>Ridge</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="resume" role="tabpanel"
-        aria-labelledby="tab-resume" tabindex="0" aria-hidden="true">
-        <h2>Resume</h2>
-
-        <div class="item">
-          <h3>Stanford Artificial Intelligence Lab Research Intern</h3>
-          <div class="meta">Stanford NLP Group, Dr. Chen Shani · May 2026 – Present</div>
-
-          <ul>
-            <li>Designed a fine-tuning pipeline comparing aggregated (majority-vote) and non-aggregated (per-annotator) label training on a vaccine hesitancy stance dataset and ChaosNLI (100 annotations per example).</li>
-            <li>Fine-tuned and evaluated 10 transformers, five encoders (BERT-base, RoBERTa-base, ModernBERT, NeoBERT, DeBERTa-v3-large) and five decoders (GPT-2, SmolLM2-135M and 360M, Pythia-160M, GPT-X2-125M), with five-fold stratified cross-validation.</li>
-            <li>Found RoBERTa unstable under non-aggregated labels (macro F1 std ±0.21 vs. ±0.03 elsewhere) and no consistent gain from non-aggregated training.</li>
-            <li>Built a modular codebase with shared data loading, cross-validation, dataset and metrics utilities supporting all models and both datasets.</li>
-          </ul>
-        </div>
-
-        <div class="item">
-          <h3>MIT Critical Data Student Researcher</h3>
-          <div class="meta">July 2026 – Present</div>
-
-          <ul>
-            <li>Co-designed a pre-registered factorial prompt experiment auditing how LLMs disclose the provenance of the medical knowledge they generate.</li>
-            <li>Built a codebook classifying AI-generated citations as fabricated, real with bibliographic errors, or fully accurate, refined on 10–15 pilot citations before freezing it.</li>
-            <li>Ran a four-tier escalating prompt protocol across multiple LLMs on adolescent mental health questions, and verified every citation by hand against PubMed, Crossref and Google Scholar.</li>
-            <li>Double-coded with a teammate and computed Cohen's kappa, with a third teammate adjudicating disagreements.</li>
-          </ul>
-        </div>
-
-        <div class="item">
-          <h3>UCLA Regression Research Lead</h3>
-          <div class="meta">PhD Candidate William Legg · December 2025 – June 2026</div>
-
-          <ul>
-            <li>Implemented OLS, Ridge and Lasso regression from first principles in NumPy to predict building thermal efficiency, deriving the Normal Equation and coding coordinate descent for Lasso.</li>
-            <li>Reached 90.8% accuracy, matching scikit-learn benchmarks, on a factorial dataset of 768 building configurations and eight geometric features.</li>
-          </ul>
-        </div>
-
-        <div class="item">
-          <h3>Skills</h3>
-
-          <div class="tags">
-            <span>Python</span>
-            <span>NumPy</span>
-            <span>Transformer fine-tuning</span>
-            <span>Activation patching</span>
-            <span>FastAPI</span>
-            <span>React + TypeScript</span>
-            <span>LaTeX</span>
-          </div>
-
-          <a class="btn" href="resume.pdf" download>Download PDF</a>
-        </div>
-      </section>
-
-      <section id="projects" role="tabpanel"
-        aria-labelledby="tab-projects" tabindex="0" aria-hidden="true">
-        <h2>Projects</h2>
-
-        <div class="item">
-          <h3>Lyze: Multimodal RAG Intelligence System</h3>
-          <div class="meta">
-            November 2025 – Present ·
-            <a href="https://github.com/arjunpil"
-              target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <ul>
-            <li>Built a multimodal RAG pipeline with FastAPI and Qdrant, enabling semantic search across PDFs, images, audio and video in one 768-dimensional vector store.</li>
-            <li>Engineered an ingestion system using LLaVA for image captioning and Whisper for audio and video transcription, so a single search works across four file types.</li>
-            <li>Designed a provider-agnostic architecture supporting four AI backends (Ollama, OpenAI, Anthropic, Gemini) with a React + TypeScript frontend and Python REST API.</li>
-            <li>Drew over 7k views across platforms, from the United States, India, the United Kingdom and more.</li>
-          </ul>
-
-          <div class="tags">
-            <span>FastAPI</span>
-            <span>Qdrant</span>
-            <span>React</span>
-            <span>TypeScript</span>
-            <span>Whisper</span>
-            <span>LLaVA</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" role="tabpanel"
-        aria-labelledby="tab-contact" tabindex="0" aria-hidden="true">
-        <h2>Contact</h2>
-
-        <p>If you found anything interesting, feel free to reach out! Any feedback is appreciated :)</p>
-
-        <div class="links" style="margin-top:20px">
-          <a href="mailto:arjun.pillai360@gmail.com">
-            Email<span>arjun.pillai360@gmail.com</span>
+    <div class="hero">
+      <img class="portrait" src="photo.jpg" alt="Portrait of Arjun Pillai" width="84" height="84">
+      <div>
+        <h1>Arjun Pillai</h1>
+        <div class="role">Student researcher · Mechanistic interpretability</div>
+        <div class="social">
+          <a href="https://scholar.google.com/citations?user=9K00Ro4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 9l4 2.5V18l7 4 7-4v-6.5L22 9 12 2zm0 2.4L18.8 9 12 13.4 5.2 9 12 4.4zM6 12.2l6 3.7 6-3.7v4.2l-6 3.4-6-3.4v-4.2z"/></svg>
           </a>
-          <a href="https://github.com/arjunpil"
-            target="_blank" rel="noopener noreferrer">
-            GitHub<span>github.com/arjunpil</span>
+          <a href="resume.pdf" download aria-label="Resume (PDF)" title="Resume (PDF)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
           </a>
-          <a href="https://www.linkedin.com/in/arjpillai/"
-            target="_blank" rel="noopener noreferrer">
-            LinkedIn<span>linkedin.com/in/arjpillai</span>
+          <a href="https://github.com/arjunpil" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.71.12 2.51.35 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/arjpillai/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://x.com/arjunpil" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.9L4.6 22H1.5l8.1-9.2L1 2h7.1l4.9 6.3L18.9 2zm-1.2 18h1.9L7.5 4H5.4l12.3 16z"/></svg>
+          </a>
+          <a href="mailto:arjun.pillai360@gmail.com" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>
           </a>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </div>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>I'm a student researcher fascinated by mechanistic interpretability: figuring out what's actually happening inside language models.</p>
+      <p>I've worked with the Stanford NLP Group (Dr. Chen Shani) and MIT Critical Data, and research has become a real passion, one that took me to the international stage at IAI²O.</p>
+      <p>Outside of research, I love math (geometry is my favorite) and the idea of optimization. My past work on NLP and mechanistic interpretability has been accepted to NeurIPS and is currently under submission to NAACL, ICML, and ICLR.</p>
+    </section>
+
+    <section id="awards">
+      <h2>Awards</h2>
+      <div class="item">
+        <h3>IAI²O 2026 — Team USA | Silver Medal</h3>
+        <div class="meta">Issued by USAAIO</div>
+        <p>One of 59 students nationally selected to represent the US internationally (Science Track), earned Silver Medal (19/60).</p>
+      </div>
+      <div class="item">
+        <h3>Stanford Math Tournament (SMT)</h3>
+        <div class="meta">Distinguished Honorable Mention (Top 20%) ×4</div>
+      </div>
+      <div class="item">
+        <h3>Berkeley Math Tournament (BMT)</h3>
+        <div class="meta">Honorable Mention (Top 50%) ×1</div>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+
+      <div class="item">
+        <h3>One Head Away from Language Confusion: Single Attention Heads Across Model Families</h3>
+        <div class="meta">NAACL 2027 Main Track · Under submission</div>
+        <p>Traces first-token language identity circuits across six transformer models using edge attribution and exact activation patching, revealing how language signals propagate through neural networks and how instruction tuning affects circuit organization and robustness.</p>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/arjunpil/LIHA-First-Token-Broadcasters" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>FTB Graph: Determining and Validating First-token Broadcasters and Language-Identity Head Circuits in Multilingual Language Models</h3>
+        <div class="meta">ICML 2027 · Under submission</div>
+        <p>Traces first-token language identity circuits across six models (GPT-2, BLOOM-560M, Pythia-1B and 2.8B, Qwen2.5-1.5B base and instruct) using edge attribution patching and exact activation patching.</p>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/ajlrza/ftb-graph-acdc-multilingual-liha" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>First-Token Broadcasters: Mechanistic Analysis of Language Identity and Distributed Robustness in Transformers</h3>
+        <div class="meta">NeurIPS LP4FM Workshop (Poster)</div>
+        <p>Investigates first-token language identity circuits across six multilingual LLMs using edge attribution and activation patching, revealing how instruction tuning shifts language-control mechanisms across model layers.</p>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/arjunpil/LIHA-First-Token-Broadcasters/tree/LP4FM" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+          <a class="linkbox" href="https://arxiv.org/abs/2606.22361" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>Aggregated vs. Per-Annotator Label Training</h3>
+        <div class="meta">Stanford NLP Group, Dr. Chen Shani · Ongoing</div>
+        <p>Compares majority-vote and per-annotator training across five encoders and five decoders on a vaccine hesitancy dataset and ChaosNLI.</p>
+      </div>
+
+      <div class="item">
+        <h3>Adolescent Mental Health: LLM Retrieval Label Training</h3>
+        <div class="meta">MIT Critical Data · Ongoing</div>
+        <p>A pre-registered experiment auditing how LLMs disclose where their medical knowledge comes from, with every returned citation verified by hand.</p>
+      </div>
+
+      <div class="item">
+        <h3>Linguistic Echoes: Explainable NLP for Academic Stress Detection</h3>
+        <div class="meta">IAI²O AI for Science 2026 · Second Place, Regional Finalist</div>
+        <p>Asks whether NLP models can recover known psycholinguistic stress markers, and whether undergrad, grad, PhD and pre-med communities express stress differently. A fine-tuned DistilBERT reached 79% accuracy (0.874 ROC-AUC) on Dreaddit, and SHAP, LIME and LIWC agreed on first-person pronouns and negative emotion. Analyzed 8,000 academic Reddit posts, with significant community differences after correction (p &lt; 0.001).</p>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/arjunpil/linguistic-echoes-explainable-nlp-stress-detection" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>Predicting Building Heating Load via Regularized Regression</h3>
+        <div class="meta">UCLA · PhD Candidate William Legg · NHSJS</div>
+        <p>Predicts building thermal efficiency with OLS, Ridge and Lasso regression built from scratch, including handling collinear features.</p>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/arjunpil/energy-efficiency-regression" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="item">
+        <h3>Lyze: Multimodal RAG Intelligence System</h3>
+        <div class="meta">November 2025 – Present</div>
+        <ul>
+          <li>Built a multimodal RAG pipeline with FastAPI and Qdrant, enabling semantic search across PDFs, images, audio and video in one 768-dimensional vector store.</li>
+          <li>Engineered an ingestion system using LLaVA for image captioning and Whisper for audio and video transcription, so a single search works across four file types.</li>
+          <li>Designed a provider-agnostic architecture supporting four AI backends (Ollama, OpenAI, Anthropic, Gemini) with a React + TypeScript frontend and Python REST API.</li>
+          <li>Drew over 7k views across platforms, from the United States, India, the United Kingdom and more.</li>
+        </ul>
+        <div class="links-row">
+          <a class="linkbox" href="https://github.com/arjunpil" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-1.8.8-2.1-2.7-.3-5.6-1.4-5.6-6.1 0-1.4.5-2.5 1.2-3.3-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C23.1 5.5 24.1 5.8 24.1 5.8c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.3 0 4.7-2.9 5.8-5.6 6.1.4.4.8 1.1.8 2.3V24" transform="translate(-4 -2) scale(.9)"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="tags"><span>FastAPI</span><span>Qdrant</span><span>React</span><span>TypeScript</span><span>Whisper</span><span>LLaVA</span></div>
+      </div>
+    </section>
+
+      </div>
 
   <footer>© <span id="yr"></span> Arjun Pillai</footer>
 
   <script>
     (function () {
       "use strict";
-
-      var tabs = ["about", "awards", "research", "resume", "projects", "contact"];
-      var nav = document.querySelector('nav[role="tablist"]');
-      var btns = Array.from(nav.querySelectorAll('[role="tab"]'));
-      var panels = tabs.map(function (name) {
-        return document.getElementById(name);
-      });
-
-      function show(name, updateHash) {
-        if (tabs.indexOf(name) < 0) {
-          name = "about";
-        }
-
-        tabs.forEach(function (tabName, index) {
-          var active = tabName === name;
-          var button = btns[index];
-          var panel = panels[index];
-
-          button.setAttribute("aria-selected", String(active));
-          button.tabIndex = active ? 0 : -1;
-
-          panel.classList.toggle("on", active);
-          panel.setAttribute("aria-hidden", String(!active));
-        });
-
-        if (updateHash !== false) {
-          try {
-            history.replaceState(null, "", "#" + name);
-          } catch (error) {
-            // Navigation still works if history updates are unavailable.
-          }
-        }
-      }
-
-      btns.forEach(function (button, index) {
-        button.addEventListener("click", function () {
-          show(button.dataset.t);
-        });
-
-        button.addEventListener("keydown", function (event) {
-          var nextIndex = index;
-
-          if (event.key === "ArrowRight") {
-            nextIndex = (index + 1) % btns.length;
-          } else if (event.key === "ArrowLeft") {
-            nextIndex = (index - 1 + btns.length) % btns.length;
-          } else if (event.key === "Home") {
-            nextIndex = 0;
-          } else if (event.key === "End") {
-            nextIndex = btns.length - 1;
-          } else {
-            return;
-          }
-
-          event.preventDefault();
-          btns[nextIndex].focus();
-          show(btns[nextIndex].dataset.t);
-        });
-      });
-
-      document.querySelectorAll("[data-go]").forEach(function (link) {
-        link.addEventListener("click", function (event) {
-          event.preventDefault();
-          show(link.dataset.go);
-        });
-      });
-
-      window.addEventListener("hashchange", function () {
-        show(location.hash.slice(1), false);
-      });
-
-      show(location.hash.slice(1), false);
       document.getElementById("yr").textContent = new Date().getFullYear();
 
-      // Animated background.
+      // Starfield background: faint drifting dots with a few twinkling stars.
       var canvas = document.getElementById("bg");
       var ctx = canvas.getContext("2d");
+      if (!ctx) { canvas.style.display = "none"; return; }
 
-      if (!ctx) {
-        canvas.style.display = "none";
-        return;
-      }
-
-      var W = 0;
-      var H = 0;
-      var dots = [];
-      var GAP = 32;
-      var t = 0;
-
+      var W = 0, H = 0, stars = [], t = 0;
       var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       var still = motionQuery.matches;
-
-      var mouse = {
-        x: 0.5,
-        y: 0.5,
-        on: false
-      };
-
-      var smooth = {
-        x: 0.5,
-        y: 0.5
-      };
-
       var blobs = document.querySelectorAll(".blob");
-      var factors = [0.6, -0.9, 1.3];
+      var factors = [0.4, -0.55, 0.7];
       var animationId = null;
       var pixelRatio = 1;
+      var mouse = { x: 0.5, y: 0.5 };
+      var smooth = { x: 0.5, y: 0.5 };
+
+      function makeStars() {
+        var density = (W * H) / 9000;
+        stars = [];
+        for (var i = 0; i < density; i++) {
+          stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 1.1 + 0.3,
+            baseA: Math.random() * 0.35 + 0.1,
+            tw: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.15 + 0.03,
+            drift: Math.random() * 0.4 + 0.1
+          });
+        }
+      }
 
       function resize() {
         pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         W = window.innerWidth;
         H = window.innerHeight;
-
         canvas.width = Math.round(W * pixelRatio);
         canvas.height = Math.round(H * pixelRatio);
         canvas.style.width = W + "px";
         canvas.style.height = H + "px";
-
         ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-
-        dots = [];
-
-        for (var i = -1; i <= W / GAP + 1; i++) {
-          for (var j = -1; j <= H / GAP + 1; j++) {
-            dots.push([i * GAP, j * GAP]);
-          }
-        }
-
-        if (still) {
-          draw();
-        }
+        makeStars();
+        if (still) draw();
       }
 
       function draw() {
-        t += still ? 0 : 0.012;
-
-        var targetX = mouse.on
-          ? mouse.x
-          : 0.5 + Math.sin(t * 0.7) * 0.25;
-
-        var targetY = mouse.on
-          ? mouse.y
-          : 0.5 + Math.cos(t * 0.5) * 0.25;
-
-        if (still) {
-          targetX = 0.5;
-          targetY = 0.5;
-        }
-
-        smooth.x += (targetX - smooth.x) * 0.07;
-        smooth.y += (targetY - smooth.y) * 0.07;
-
-        var px = smooth.x - 0.5;
-        var py = smooth.y - 0.5;
-        var mx = smooth.x * W;
-        var my = smooth.y * H;
+        t += still ? 0 : 0.01;
+        smooth.x += (mouse.x - smooth.x) * 0.04;
+        smooth.y += (mouse.y - smooth.y) * 0.04;
+        var px = smooth.x - 0.5, py = smooth.y - 0.5;
 
         if (!still) {
           blobs.forEach(function (blob, index) {
-            var ax = Math.sin(t * 0.6 * factors[index] + index) * 60;
-            var ay = Math.cos(t * 0.5 * factors[index] + index) * 60;
-
+            var ax = Math.sin(t * 0.5 * factors[index] + index * 2) * 50;
+            var ay = Math.cos(t * 0.4 * factors[index] + index * 2) * 50;
             blob.style.transform =
-              "translate(" +
-              (px * -160 * factors[index] + ax) +
-              "px," +
-              (py * -160 * factors[index] + ay) +
-              "px)";
+              "translate(" + (px * -90 * factors[index] + ax) + "px," +
+              (py * -90 * factors[index] + ay) + "px)";
           });
         }
 
         ctx.clearRect(0, 0, W, H);
+        var rgb = getComputedStyle(document.documentElement).getPropertyValue("--dot").trim();
 
-        var rgb = getComputedStyle(document.documentElement)
-          .getPropertyValue("--dot")
-          .trim();
-
-        for (var k = 0; k < dots.length; k++) {
-          var bx = dots[k][0];
-          var by = dots[k][1];
-
-          var ox = bx +
-            Math.sin(by * 0.012 + t * 1.4) * 7 +
-            px * -40;
-
-          var oy = by +
-            Math.cos(bx * 0.012 + t * 1.2) * 7 +
-            py * -40;
-
-          var dx = mx - ox;
-          var dy = my - oy;
-          var distance = Math.sqrt(dx * dx + dy * dy);
-          var influence = Math.max(0, 1 - distance / 280);
-
-          ctx.fillStyle =
-            "rgba(" + rgb + "," + (0.2 + influence * 0.6) + ")";
-
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var tw = still ? 0 : Math.sin(t * s.speed * 6 + s.tw) * 0.5 + 0.5;
+          var a = s.baseA + tw * 0.25;
+          var ox = s.x + px * -14 * s.drift;
+          var oy = s.y - (still ? 0 : (t * s.speed * 6) % (H + 20)) + py * -14 * s.drift;
+          var wrapped = ((oy % (H + 10)) + (H + 10)) % (H + 10);
+          ctx.fillStyle = "rgba(" + rgb + "," + a.toFixed(3) + ")";
           ctx.beginPath();
-
-          ctx.arc(
-            ox + dx * influence * 0.3,
-            oy + dy * influence * 0.3,
-            1.2 + influence * 3,
-            0,
-            Math.PI * 2
-          );
-
+          ctx.arc(ox, wrapped, s.r, 0, Math.PI * 2);
           ctx.fill();
         }
       }
 
       function frame() {
         draw();
-
-        if (!still) {
-          animationId = window.requestAnimationFrame(frame);
-        }
+        if (!still) animationId = window.requestAnimationFrame(frame);
       }
 
       function updateMotionPreference(event) {
         still = event.matches;
-
-        if (animationId !== null) {
-          window.cancelAnimationFrame(animationId);
-          animationId = null;
-        }
-
+        if (animationId !== null) { window.cancelAnimationFrame(animationId); animationId = null; }
         if (still) {
-          blobs.forEach(function (blob) {
-            blob.style.transform = "none";
-          });
-
+          blobs.forEach(function (blob) { blob.style.transform = "none"; });
           draw();
         } else {
           animationId = window.requestAnimationFrame(frame);
@@ -917,11 +475,9 @@
       }
 
       window.addEventListener("resize", resize);
-
       window.addEventListener("pointermove", function (event) {
         mouse.x = event.clientX / Math.max(W, 1);
         mouse.y = event.clientY / Math.max(H, 1);
-        mouse.on = true;
       });
 
       if (typeof motionQuery.addEventListener === "function") {
